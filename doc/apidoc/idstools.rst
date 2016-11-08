@@ -1,4 +1,4 @@
-idstools package
+rulecata package
 ================
 
 Subpackages
@@ -6,71 +6,71 @@ Subpackages
 
 .. toctree::
 
-    idstools.scripts
+    rulecata.scripts
 
 Submodules
 ----------
 
-idstools.maps module
+rulecata.maps module
 --------------------
 
-.. automodule:: idstools.maps
+.. automodule:: rulecata.maps
     :members:
     :undoc-members:
     :show-inheritance:
 
-idstools.net module
+rulecata.net module
 -------------------
 
-.. automodule:: idstools.net
+.. automodule:: rulecata.net
     :members:
     :undoc-members:
     :show-inheritance:
 
-idstools.packet module
+rulecata.packet module
 ----------------------
 
-.. automodule:: idstools.packet
+.. automodule:: rulecata.packet
     :members:
     :undoc-members:
     :show-inheritance:
 
-idstools.rule module
+rulecata.rule module
 --------------------
 
-.. automodule:: idstools.rule
+.. automodule:: rulecata.rule
     :members:
     :undoc-members:
     :show-inheritance:
 
-idstools.snort module
+rulecata.snort module
 ---------------------
 
-.. automodule:: idstools.snort
+.. automodule:: rulecata.snort
     :members:
     :undoc-members:
     :show-inheritance:
 
-idstools.suricata module
+rulecata.suricata module
 ------------------------
 
-.. automodule:: idstools.suricata
+.. automodule:: rulecata.suricata
     :members:
     :undoc-members:
     :show-inheritance:
 
-idstools.unified2 module
+rulecata.unified2 module
 ------------------------
 
-.. automodule:: idstools.unified2
+.. automodule:: rulecata.unified2
     :members:
     :undoc-members:
     :show-inheritance:
 
-idstools.util module
+rulecata.util module
 --------------------
 
-.. automodule:: idstools.util
+.. automodule:: rulecata.util
     :members:
     :undoc-members:
     :show-inheritance:
@@ -79,7 +79,7 @@ idstools.util module
 Module contents
 ---------------
 
-.. automodule:: idstools
+.. automodule:: rulecata
     :members:
     :undoc-members:
     :show-inheritance:

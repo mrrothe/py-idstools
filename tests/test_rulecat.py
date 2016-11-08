@@ -29,8 +29,8 @@ import unittest
 import shlex
 import re
 
-import idstools.rule
-from idstools.scripts import rulecat
+import rulecata.rule
+from rulecata import main as rulecat
 
 class ThresholdProcessorTestCase(unittest.TestCase):
 
@@ -59,7 +59,7 @@ class ThresholdProcessorTestCase(unittest.TestCase):
 
     def test_replace(self):
         rule_string = """alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"ET MALWARE Windows executable sent when remote host claims to send an image 2"; flow: established,from_server; content:"|0d 0a|Content-Type|3a| image/jpeg|0d 0a 0d 0a|MZ"; fast_pattern:12,20; classtype:trojan-activity; sid:2020757; rev:2;)"""
-        rule = idstools.rule.parse(rule_string)
+        rule = rulecata.rule.parse(rule_string)
 
         line = "suppress re:windows"
         self.assertEquals(
@@ -82,7 +82,7 @@ class ModifyRuleFilterTestCase(unittest.TestCase):
     rule_string = """alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"ET MALWARE Windows executable sent when remote host claims to send an image 2"; flow: established,from_server; content:"|0d 0a|Content-Type|3a| image/jpeg|0d 0a 0d 0a|MZ"; fast_pattern:12,20; classtype:trojan-activity; sid:2020757; rev:2;)"""
 
     def test_id_match(self):
-        rule0 = idstools.rule.parse(self.rule_string)
+        rule0 = rulecata.rule.parse(self.rule_string)
         line = '2020757 "\|0d 0a\|" "|ff ff|"'
         rule_filter = rulecat.ModifyRuleFilter.parse(line)
         self.assertTrue(rule_filter != None)
@@ -93,7 +93,7 @@ class ModifyRuleFilterTestCase(unittest.TestCase):
             """alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"ET MALWARE Windows executable sent when remote host claims to send an image 2"; flow: established,from_server; content:"|ff ff|Content-Type|3a| image/jpeg|0d 0a 0d 0a|MZ"; fast_pattern:12,20; classtype:trojan-activity; sid:2020757; rev:2;)""")
 
     def test_re_match(self):
-        rule0 = idstools.rule.parse(self.rule_string)
+        rule0 = rulecata.rule.parse(self.rule_string)
         line = 're:classtype:trojan-activity "\|0d 0a\|" "|ff ff|"'
         rule_filter = rulecat.ModifyRuleFilter.parse(line)
         self.assertTrue(rule_filter != None)
@@ -108,7 +108,7 @@ class GroupMatcherTestCase(unittest.TestCase):
     rule_string = """alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"ET MALWARE Windows executable sent when remote host claims to send an image 2"; flow: established,from_server; content:"|0d 0a|Content-Type|3a| image/jpeg|0d 0a 0d 0a|MZ"; fast_pattern:12,20; classtype:trojan-activity; sid:2020757; rev:2;)"""
 
     def test_match(self):
-        rule = idstools.rule.parse(self.rule_string, "rules/malware.rules")
+        rule = rulecata.rule.parse(self.rule_string, "rules/malware.rules")
         matcher = rulecat.GroupMatcher.parse("group: */malware.rules")
         self.assertTrue(matcher.match(rule))
 
@@ -117,7 +117,7 @@ class DropRuleFilterTestCase(unittest.TestCase):
     rule_string = """alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"ET MALWARE Windows executable sent when remote host claims to send an image 2"; flow: established,from_server; content:"|0d 0a|Content-Type|3a| image/jpeg|0d 0a 0d 0a|MZ"; fast_pattern:12,20; classtype:trojan-activity; sid:2020757; rev:2;)"""
 
     def test_enabled_rule(self):
-        rule0 = idstools.rule.parse(self.rule_string, "rules/malware.rules")
+        rule0 = rulecata.rule.parse(self.rule_string, "rules/malware.rules")
         id_matcher = rulecat.IdRuleMatcher.parse("2020757")
         self.assertTrue(id_matcher.match(rule0))
 
@@ -128,7 +128,7 @@ class DropRuleFilterTestCase(unittest.TestCase):
         self.assertTrue(str(rule1).startswith("drop"))
 
     def test_disabled_rule(self):
-        rule0 = idstools.rule.parse(
+        rule0 = rulecata.rule.parse(
             "# " + self.rule_string, "rules/malware.rules")
         id_matcher = rulecat.IdRuleMatcher.parse("2020757")
         self.assertTrue(id_matcher.match(rule0))

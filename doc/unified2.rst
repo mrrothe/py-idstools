@@ -1,7 +1,7 @@
 Unified2 File Reading
 =====================
 
-idstools provides unified2 readers for reading individual records as
+rulecata provides unified2 readers for reading individual records as
 well as aggregating records into events.
 
 .. contents:: Contents
@@ -19,40 +19,40 @@ aggregated into events.
 RecordReader
 ^^^^^^^^^^^^
 
-.. autoclass:: idstools.unified2.RecordReader
+.. autoclass:: rulecata.unified2.RecordReader
    :noindex:
    :members:
 
 FileRecordReader
 ^^^^^^^^^^^^^^^^
 
-.. autoclass:: idstools.unified2.FileRecordReader
+.. autoclass:: rulecata.unified2.FileRecordReader
    :noindex:
    :members:
 
 FileEventReader
 ^^^^^^^^^^^^^^^
 
-.. autoclass:: idstools.unified2.FileEventReader
+.. autoclass:: rulecata.unified2.FileEventReader
    :noindex:
    :members:
 
 SpoolRecordReader
 ^^^^^^^^^^^^^^^^^
 
-.. autoclass:: idstools.unified2.SpoolRecordReader
+.. autoclass:: rulecata.unified2.SpoolRecordReader
    :noindex:
 
-   .. automethod:: idstools.unified2.SpoolRecordReader.next
+   .. automethod:: rulecata.unified2.SpoolRecordReader.next
       :noindex:
 
-   .. automethod:: idstools.unified2.SpoolRecordReader.tell
+   .. automethod:: rulecata.unified2.SpoolRecordReader.tell
       :noindex:
 
 SpoolEventReader
 ^^^^^^^^^^^^^^^^
 
-.. autoclass:: idstools.unified2.SpoolEventReader
+.. autoclass:: rulecata.unified2.SpoolEventReader
    :noindex:
    :members:
 
@@ -75,18 +75,18 @@ Python dict.
 Event
 ^^^^^
 
-.. autoclass:: idstools.unified2.Event
+.. autoclass:: rulecata.unified2.Event
    :noindex:
 
 Packet
 ^^^^^^
 
-.. autoclass:: idstools.unified2.Packet
+.. autoclass:: rulecata.unified2.Packet
    :noindex:
 
 
 ExtraData
 ^^^^^^^^^
 
-.. autoclass:: idstools.unified2.ExtraData
+.. autoclass:: rulecata.unified2.ExtraData
    :noindex:

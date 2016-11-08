@@ -1,17 +1,17 @@
 rulecat
 =======
 
-.. automodule:: idstools.scripts.rulecat
+.. automodule:: rulecata.scripts.rulecat
 
 Synopsis
 --------
 
-``idstools-rulecat`` [OPTIONS]
+``rulecata-rulecat`` [OPTIONS]
 
 Description
 -----------
 
-``idstools-ruleset`` aims to be a simple to use rule download and
+``rulecata-ruleset`` aims to be a simple to use rule download and
 management tool for Suricata. It can also be used for Snort when no SO
 rule stub generation is required.
 
@@ -29,7 +29,7 @@ Options
 .. option:: -t <directory>, --temp-dir=<directory>
 
    Temporary working directory (default:
-   /var/tmp/idstools-rulecat). This is where downloaded files will be
+   /var/tmp/rulecata-rulecat). This is where downloaded files will be
    stored.
 
 .. option:: --suricata=<path>
@@ -129,17 +129,17 @@ Examples
 Download ET open rules for the version of Suricata found on the path,
 saving the rules in /etc/suricata/rules::
 
-    idstools-rulecat -o /etc/suricata/rules
+    rulecata-rulecat -o /etc/suricata/rules
 
 Download ET pro rules for the version of Suricata found on the path,
 saving the rules in /etc/suricata/rules::
 
-    idstools-rulecat --etpro XXXXXXXXXXXXXXXX -o /etc/suricata/rules
+    rulecata-rulecat --etpro XXXXXXXXXXXXXXXX -o /etc/suricata/rules
 
 Download ET open rules plus an additional rule files and save the
 rules in /etc/suricata/rules::
 
-    idstools-rulecat --etopen \
+    rulecata-rulecat --etopen \
         --url https://sslbl.abuse.ch/blacklist/sslblacklist.rules \
 	-o /etc/suricata/rules
 
@@ -147,7 +147,7 @@ Configuration File
 ------------------
 
 Command line arguments can be put in a file, one per line and used as
-a configuration file.  By default, idstools-rulecat will look for a
+a configuration file.  By default, rulecata-rulecat will look for a
 file in the current directory named rulecat.conf.
 
 Example configuration file::
@@ -162,11 +162,11 @@ Example configuration file::
     --url=https://sslbl.abuse.ch/blacklist/sslblacklist.rules
 
 If *rulecat.conf* is in the current directory it will be used just by
-calling ``idstools-rulecat`` with no arguments. Otherwise you can
-point *idstools-rulecat* at a configuration with the command
-``idstools-rulecat @/path/to/rulecat.conf``.
+calling ``rulecata-rulecat`` with no arguments. Otherwise you can
+point *rulecata-rulecat* at a configuration with the command
+``rulecata-rulecat @/path/to/rulecat.conf``.
 
 Source
 ------
 
-`idstools/scripts/rulecat.py <../_modules/idstools/scripts/rulecat.html>`_
+`rulecata/scripts/rulecat.py <../_modules/rulecata/scripts/rulecat.html>`_

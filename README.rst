@@ -1,7 +1,7 @@
-py-idstools |Build Status|
+py-rulecata |Build Status|
 ==========================
 
-py-idstools is a collection of Python libraries for working with IDS
+py-rulecata is a collection of Python libraries for working with IDS
 systems (typically Snort and Suricata).
 
 Features
@@ -36,12 +36,12 @@ Installation
 Latest Release (Recommended)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-pip install idstools
+pip install rulecata
 
 Latest from Git
 ~~~~~~~~~~~~~~~
 
-pip install https://github.com/jasonish/py-idstools/archive/master.zip
+pip install https://github.com/jasonish/py-rulecata/archive/master.zip
 
 Manually
 ~~~~~~~~
@@ -61,7 +61,7 @@ Reading a Unified2 Spool Directory
 The following code snippet will "tail" a unified log directory
 aggregating records into events::
 
-    from idstools import unified2
+    from rulecata import unified2
 
     reader = unified2.SpoolEventReader("/var/log/snort",
         "unified2.log", follow=True)
@@ -71,10 +71,10 @@ aggregating records into events::
 Documentation
 -------------
 
-Further documentation is located at http://idstools.readthedocs.org.
+Further documentation is located at http://rulecata.readthedocs.org.
 
-.. |Build Status| image:: https://travis-ci.org/jasonish/py-idstools.png?branch=master
-   :target: https://travis-ci.org/jasonish/py-idstools
+.. |Build Status| image:: https://travis-ci.org/jasonish/py-rulecata.png?branch=master
+   :target: https://travis-ci.org/jasonish/py-rulecata
 
 Changelog
 ---------
@@ -87,23 +87,23 @@ Unreleased
 0.5.4
 ~~~~~
 
-- idstools: handle rules with no msg in rule parser
-- idstools-rulecat: support a drop.conf for setting rules to drop
-- idstools-eve2pcap: allow link type to be set on command line
+- rulecata: handle rules with no msg in rule parser
+- rulecata-rulecat: support a drop.conf for setting rules to drop
+- rulecata-eve2pcap: allow link type to be set on command line
 - unified2: handle large appid buffer in newer versions of Snort.
 
 0.5.3
 ~~~~~
 
-- idstools-rulecat: better documentation
-- idstools-rulecat: use ET Pro https URL
+- rulecata-rulecat: better documentation
+- rulecata-rulecat: use ET Pro https URL
 
 0.5.2
 ~~~~~
 
-- idstools-u2json: fix --delete
-- idstools-u2json: add --verbose flag for debug logging
-- idstools-rulecat: allow multiple urls
+- rulecata-u2json: fix --delete
+- rulecata-u2json: add --verbose flag for debug logging
+- rulecata-rulecat: allow multiple urls
 
 0.5.1
 ~~~~~
@@ -115,11 +115,11 @@ Unreleased
 0.5.0
 ~~~~~
 
-- New tool: idstools-dumpdynamicrules. A wrapper around Snort to dump
+- New tool: rulecata-dumpdynamicrules. A wrapper around Snort to dump
   dynamic rule stubs and optionally repack the tarball with the new
   stubs.
-- New tool: idstools-u2eve. Basically a copy of the current u2json,
-  but will aim to keep a compatible eve output style.  idstools-u2json
+- New tool: rulecata-u2eve. Basically a copy of the current u2json,
+  but will aim to keep a compatible eve output style.  rulecata-u2json
   will probably become more of a basic example program.
 - A basic packet decoding module.
 - New tool: rulecat. A basic Suricata rule management tool.

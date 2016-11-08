@@ -1,14 +1,14 @@
 gensidmsgmap
 ============
 
-.. automodule:: idstools.scripts.gensidmsgmap
+.. automodule:: rulecata.scripts.gensidmsgmap
 
 Usage
 -----
 
-.. program-output:: ../bin/idstools-gensidmsgmap --help
+.. program-output:: ../bin/rulecata-gensidmsgmap --help
 
 Source
 ------
 
-`idstools/scripts/gensidmsgmap.py <../_modules/idstools/scripts/gensidmsgmap.html>`_
+`rulecata/scripts/gensidmsgmap.py <../_modules/rulecata/scripts/gensidmsgmap.html>`_

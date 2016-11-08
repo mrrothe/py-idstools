@@ -1,14 +1,14 @@
 eve2pcap
 ========
 
-.. automodule:: idstools.scripts.eve2pcap
+.. automodule:: rulecata.scripts.eve2pcap
 
 Usage
 -----
 
-.. program-output:: ../bin/idstools-eve2pcap --help
+.. program-output:: ../bin/rulecata-eve2pcap --help
 
 Source
 ------
 
-`idstools/scripts/eve2pcap.py <../_modules/idstools/scripts/eve2pcap.html>`_
+`rulecata/scripts/eve2pcap.py <../_modules/rulecata/scripts/eve2pcap.html>`_

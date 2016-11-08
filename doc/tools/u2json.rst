@@ -1,32 +1,32 @@
 u2json
 ======
 
-.. automodule:: idstools.scripts.u2json
+.. automodule:: rulecata.scripts.u2json
 
 .. contents:: Contents
 
 Usage
 -----
 
-.. program-output:: ../bin/idstools-u2json --help
+.. program-output:: ../bin/rulecata-u2json --help
 
 Example - View unified2 File as JSON
 ------------------------------------
 
 ::
 
-   idstools-u2json /var/log/snort/unified2.log.1397575268
+   rulecata-u2json /var/log/snort/unified2.log.1397575268
 
 To resolve alert descriptions and classifications::
 
-   idstools-u2json --snort-conf /etc/snort/etc/snort.conf \
+   rulecata-u2json --snort-conf /etc/snort/etc/snort.conf \
        /var/log/snort/unified2.log.1397575268
 
 The above assumes that sid-msg.map, gen-msg.map and
 classification.config live alongside the specified snort.conf.  If
 they do not, the options to specify each individually may be used::
 
-  idstools-u2json -C /etc/snort/etc/classification.config \
+  rulecata-u2json -C /etc/snort/etc/classification.config \
       -S /etc/snort/etc/sid-msg.map \
       -G /etc/snort/etc/gen-msg.map \
       /var/log/snort/unified2.log.1397575268
@@ -36,7 +36,7 @@ Example - Continuous Conversion to JSON
 
 ::
 
-   idstools-u2json --snort.conf /etc/snort/etc/snort.conf \
+   rulecata-u2json --snort.conf /etc/snort/etc/snort.conf \
        --directory /var/log/snort \
        --prefix unified2.log \
        --follow \
@@ -69,15 +69,15 @@ above::
    --delete
    --output=/var/log/snort/alerts.json
 
-Then call idstools-u2json like::
+Then call rulecata-u2json like::
 
-  idstools-u2json @/path/to/config-file
+  rulecata-u2json @/path/to/config-file
 
 Addtional arguments can also be provided like::
 
-  idstools-u2json @/path/to/config-file --stdout
+  rulecata-u2json @/path/to/config-file --stdout
 
 Source
 ------
 
-`idstools/scripts/u2json.py <../_modules/idstools/scripts/u2json.html>`_
+`rulecata/scripts/u2json.py <../_modules/rulecata/scripts/u2json.html>`_

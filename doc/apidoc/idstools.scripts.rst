@@ -1,69 +1,69 @@
-idstools.scripts package
+rulecata.scripts package
 ========================
 
 Submodules
 ----------
 
-idstools.scripts.dumpdynamicrules module
+rulecata.scripts.dumpdynamicrules module
 ----------------------------------------
 
-.. automodule:: idstools.scripts.dumpdynamicrules
+.. automodule:: rulecata.scripts.dumpdynamicrules
     :members:
     :undoc-members:
     :show-inheritance:
 
-idstools.scripts.eve2pcap module
+rulecata.scripts.eve2pcap module
 --------------------------------
 
-.. automodule:: idstools.scripts.eve2pcap
+.. automodule:: rulecata.scripts.eve2pcap
     :members:
     :undoc-members:
     :show-inheritance:
 
-idstools.scripts.gensidmsgmap module
+rulecata.scripts.gensidmsgmap module
 ------------------------------------
 
-.. automodule:: idstools.scripts.gensidmsgmap
+.. automodule:: rulecata.scripts.gensidmsgmap
     :members:
     :undoc-members:
     :show-inheritance:
 
-idstools.scripts.rulecat module
+rulecata.scripts.rulecat module
 -------------------------------
 
-.. automodule:: idstools.scripts.rulecat
+.. automodule:: rulecata.scripts.rulecat
     :members:
     :undoc-members:
     :show-inheritance:
 
-idstools.scripts.u2eve module
+rulecata.scripts.u2eve module
 -----------------------------
 
-.. automodule:: idstools.scripts.u2eve
+.. automodule:: rulecata.scripts.u2eve
     :members:
     :undoc-members:
     :show-inheritance:
 
-idstools.scripts.u2fast module
+rulecata.scripts.u2fast module
 ------------------------------
 
-.. automodule:: idstools.scripts.u2fast
+.. automodule:: rulecata.scripts.u2fast
     :members:
     :undoc-members:
     :show-inheritance:
 
-idstools.scripts.u2json module
+rulecata.scripts.u2json module
 ------------------------------
 
-.. automodule:: idstools.scripts.u2json
+.. automodule:: rulecata.scripts.u2json
     :members:
     :undoc-members:
     :show-inheritance:
 
-idstools.scripts.u2spewfoo module
+rulecata.scripts.u2spewfoo module
 ---------------------------------
 
-.. automodule:: idstools.scripts.u2spewfoo
+.. automodule:: rulecata.scripts.u2spewfoo
     :members:
     :undoc-members:
     :show-inheritance:
@@ -72,7 +72,7 @@ idstools.scripts.u2spewfoo module
 Module contents
 ---------------
 
-.. automodule:: idstools.scripts
+.. automodule:: rulecata.scripts
     :members:
     :undoc-members:
     :show-inheritance:

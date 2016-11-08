@@ -29,7 +29,7 @@ import os
 import unittest
 import io
 
-from idstools import net
+from rulecata import net
 
 class GetTestCase(unittest.TestCase):
 

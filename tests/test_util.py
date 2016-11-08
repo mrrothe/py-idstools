@@ -28,7 +28,7 @@ from __future__ import print_function
 import unittest
 import tempfile
 
-from idstools import util
+from rulecata import util
 
 class Md5TestCase(unittest.TestCase):
 

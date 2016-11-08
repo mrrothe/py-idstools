@@ -1,14 +1,14 @@
 u2spewfoo
 =========
 
-.. automodule:: idstools.scripts.u2spewfoo
+.. automodule:: rulecata.scripts.u2spewfoo
 
 Usage
 -----
 
-.. program-output:: ../bin/idstools-u2spewfoo --help
+.. program-output:: ../bin/rulecata-u2spewfoo --help
 
 Source
 ------
 
-`idstools/scripts/u2spewfoo.py <../_modules/idstools/scripts/u2spewfoo.html>`_
+`rulecata/scripts/u2spewfoo.py <../_modules/rulecata/scripts/u2spewfoo.html>`_

@@ -11,21 +11,21 @@ objects such as signature IDs to a signature description.
 SignatureMap
 ------------
 
-.. autoclass:: idstools.maps.SignatureMap
+.. autoclass:: rulecata.maps.SignatureMap
    :noindex:
    :members:
 
 ClassificationMap
 -----------------
 
-.. autoclass:: idstools.maps.ClassificationMap
+.. autoclass:: rulecata.maps.ClassificationMap
    :noindex:
 
-   .. automethod:: idstools.maps.ClassificationMap.get
+   .. automethod:: rulecata.maps.ClassificationMap.get
       :noindex:
 
-   .. automethod:: idstools.maps.ClassificationMap.get_by_name
+   .. automethod:: rulecata.maps.ClassificationMap.get_by_name
       :noindex:
 
-   .. automethod:: idstools.maps.ClassificationMap.load_from_file
+   .. automethod:: rulecata.maps.ClassificationMap.load_from_file
       :noindex:

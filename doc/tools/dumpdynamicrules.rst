@@ -1,14 +1,14 @@
 dumpdynamicrules
 ================
 
-.. automodule:: idstools.scripts.dumpdynamicrules
+.. automodule:: rulecata.scripts.dumpdynamicrules
 
 Usage
 -----
 
-.. program-output:: ../bin/idstools-dumpdynamicrules --help
+.. program-output:: ../bin/rulecata-dumpdynamicrules --help
 
 Source
 ------
 
-`idstools/scripts/dumpdynamicrules.py <../_modules/idstools/scripts/dumpdynamicrules.html>`_
+`rulecata/scripts/dumpdynamicrules.py <../_modules/rulecata/scripts/dumpdynamicrules.html>`_

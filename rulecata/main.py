@@ -51,12 +51,12 @@ except:
 
 if sys.argv[0] == __file__:
     sys.path.insert(
-        0, os.path.abspath(os.path.join(__file__, "..", "..", "..")))
+        0, os.path.abspath(os.path.join(__file__, "..", "..")))
 
-import idstools.rule
-import idstools.suricata
-import idstools.net
-from idstools.util import archive_to_dict
+import rulecata.rule
+import rulecata.suricata
+import rulecata.net
+from rulecata.util import archive_to_dict
 
 CONF_SAMPLE = """# rulecat.conf
 """
@@ -141,7 +141,7 @@ ET_PRO_URL = "https://rules.emergingthreatspro.com/%(code)s/suricata%(version)s/
 ET_OPEN_URL = "https://rules.emergingthreats.net/open/suricata%(version)s/emerging.rules.tar.gz"
 
 class IdRuleMatcher(object):
-    """Matcher object to match an idstools rule object by its signature
+    """Matcher object to match an rulecata rule object by its signature
     ID."""
 
     def __init__(self, generatorId, signatureId):
@@ -168,7 +168,7 @@ class IdRuleMatcher(object):
         return None
 
 class GroupMatcher(object):
-    """Matcher object to match an idstools rule object by its group (ie:
+    """Matcher object to match an rulecata rule object by its group (ie:
     filename)."""
 
     def __init__(self, pattern):
@@ -190,7 +190,7 @@ class GroupMatcher(object):
         return None
 
 class ReRuleMatcher(object):
-    """Matcher object to match an idstools rule object by regular
+    """Matcher object to match an rulecata rule object by regular
     expression."""
 
     def __init__(self, pattern):
@@ -215,7 +215,7 @@ class ReRuleMatcher(object):
         return None
 
 class ModifyRuleFilter(object):
-    """Filter to modify an idstools rule object.
+    """Filter to modify an rulecata rule object.
 
     Important note: This filter does not modify the rule inplace, but
     instead returns a new rule object with the modification.
@@ -230,7 +230,7 @@ class ModifyRuleFilter(object):
         return self.matcher.match(rule)
 
     def filter(self, rule):
-        return idstools.rule.parse(
+        return rulecata.rule.parse(
             self.pattern.sub(self.repl, str(rule)), rule.group)
 
     @classmethod
@@ -245,7 +245,7 @@ class ModifyRuleFilter(object):
         return cls(matcher, pattern, tokens[2])
 
 class DropRuleFilter(object):
-    """ Filter to modify an idstools rule object to a drop rule. """
+    """ Filter to modify an rulecata rule object to a drop rule. """
 
     def __init__(self, matcher):
         self.matcher = matcher
@@ -254,7 +254,7 @@ class DropRuleFilter(object):
         return self.matcher.match(rule)
 
     def filter(self, rule):
-        drop_rule = idstools.rule.parse(re.sub("^\w+", "drop", rule.raw))
+        drop_rule = rulecata.rule.parse(re.sub("^\w+", "drop", rule.raw))
         drop_rule.enabled = rule.enabled
         return drop_rule
 
@@ -269,7 +269,7 @@ class Fetch(object):
             local_checksum = hashlib.md5(open(tmp_filename).read()).hexdigest()
             remote_checksum_buf = BytesIO()
             logger.info("Fetching %s." % (checksum_url))
-            remote_checksum = idstools.net.get(
+            remote_checksum = rulecata.net.get(
                 checksum_url, remote_checksum_buf)
             logger.debug("Local checksum=|%s|; remote checksum=|%s|" % (
                 local_checksum.strip(), remote_checksum_buf.getvalue().strip()))
@@ -304,7 +304,7 @@ class Fetch(object):
                 return self.extract_files(tmp_filename)
         if not os.path.exists(self.args.temp_dir):
             os.makedirs(self.args.temp_dir)
-        idstools.net.get(
+        rulecata.net.get(
             url, open(tmp_filename, "wb"), progress_hook=self.progress_hook)
         logger.info("Done.")
         return self.extract_files(tmp_filename)
@@ -411,7 +411,7 @@ def write_to_directory(directory, files, rulemap):
         else:
             content = []
             for line in BytesIO(files[filename]):
-                rule = idstools.rule.parse(line)
+                rule = rulecata.rule.parse(line)
                 if not rule:
                     content.append(line.strip())
                 else:
@@ -449,7 +449,7 @@ def write_merged(filename, rulemap):
     prev_rulemap = {}
     if os.path.exists(filename):
         prev_rulemap = build_rule_map(
-            idstools.rule.parse_fileobj(open(filename)))
+            rulecata.rule.parse_fileobj(open(filename)))
     report = build_report(prev_rulemap, rulemap)
 
     logger.info("Writing %s: added: %d; removed %d; modified: %d" % (
@@ -475,11 +475,11 @@ def write_sid_msg_map(filename, rulemap, version=1):
     with open(filename, "w") as fileobj:
         for rule in rulemap.itervalues():
             if version == 2:
-                formatted = idstools.rule.format_sidmsgmap_v2(rule)
+                formatted = rulecata.rule.format_sidmsgmap_v2(rule)
                 if formatted:
                     print(formatted, file=fileobj)
             else:
-                formatted = idstools.rule.format_sidmsgmap(rule)
+                formatted = rulecata.rule.format_sidmsgmap(rule)
                 if formatted:
                     print(formatted, file=fileobj)
 
@@ -521,7 +521,7 @@ def dump_sample_configs():
             write_file(filename, files[filename])
 
 def resolve_flowbits(rulemap, disabled_rules):
-    flowbit_resolver = idstools.rule.FlowbitResolver()
+    flowbit_resolver = rulecata.rule.FlowbitResolver()
     flowbit_enabled = set()
     while True:
         flowbits = flowbit_resolver.get_required_flowbits(rulemap)
@@ -633,14 +633,14 @@ def resolve_etpro_url(etpro, suricata_path):
         "code": etpro,
         "version": ""
     }
-    suricata_version = idstools.suricata.get_version(suricata_path)
+    suricata_version = rulecata.suricata.get_version(suricata_path)
     if suricata_version.short:
         mappings["version"] = "-" + suricata_version.short
     return ET_PRO_URL % mappings
 
 def resolve_etopen_url(suricata_path):
     mappings = {"version": ""}
-    suricata_version = idstools.suricata.get_version(suricata_path)
+    suricata_version = rulecata.suricata.get_version(suricata_path)
     if suricata_version:
         mappings["version"] = "-" + suricata_version.short
     return ET_OPEN_URL % mappings
@@ -653,12 +653,12 @@ def main():
             logger.info("Loading ./rulecat.conf.")
             sys.argv.insert(1, "@./rulecat.conf")
 
-    suricata_path = idstools.suricata.get_path()
+    suricata_path = rulecata.suricata.get_path()
 
     parser = argparse.ArgumentParser(fromfile_prefix_chars="@")
     parser.add_argument("-v", "--verbose", action="store_true", default=False,
                         help="Be more verbose")
-    parser.add_argument("-t", "--temp-dir", default="/var/tmp/idstools-rulecat",
+    parser.add_argument("-t", "--temp-dir", default="/var/tmp/rulecata-rulecat",
                         metavar="<directory>",
                         help="Temporary work directory")
     parser.add_argument("--suricata", default=suricata_path,
@@ -750,7 +750,7 @@ def main():
     rules = []
     for filename in files:
         logger.debug("Parsing %s." % (filename))
-        rules += idstools.rule.parse_fileobj(
+        rules += rulecata.rule.parse_fileobj(
             BytesIO(files[filename]), filename)
 
     rulemap = build_rule_map(rules)

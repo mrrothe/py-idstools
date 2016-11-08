@@ -1,7 +1,7 @@
-idstools
+rulecata
 ========
 
 .. toctree::
    :maxdepth: 4
 
-   idstools
+   rulecata

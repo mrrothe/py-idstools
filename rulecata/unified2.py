@@ -34,7 +34,7 @@ For more information on the unified2 file format see:
 
 ::
 
-    usage: from idstools import unified2
+    usage: from rulecata import unified2
 
 """
 

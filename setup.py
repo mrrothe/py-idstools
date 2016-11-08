@@ -1,30 +1,24 @@
 from setuptools import setup
 
-import idstools
+import rulecata
 
 setup(
-    name="idstools",
-    version=idstools.version,
-    description="IDS Utility Library",
+    name="rulecata",
+    version=rulecata.version,
+    description="Suricata Rule Updater",
     author="Jason Ish",
     author_email="ish@unx.ca",
     packages=[
-        "idstools",
-        "idstools.scripts",
-        "idstools.compat",
-        "idstools.compat.argparse",
+        "rulecata",
+        "rulecata.compat",
+        "rulecata.compat.argparse",
     ],
-    url="https://github.com/jasonish/py-idstools",
-    license="BSD",
+    url="https://github.com/jasonish/rulecata",
+    license="GPLv2",
     classifiers=[
-        'License :: OSI Approved :: BSD License',
+        'License :: OSI Approved :: GPLv2 License',
     ],
     scripts = [
-        "bin/idstools-gensidmsgmap",
-        "bin/idstools-u2fast",
-        "bin/idstools-u2json",
-        "bin/idstools-rulecat",
-        "bin/idstools-u2eve",
-        "bin/idstools-eve2pcap",
+        "bin/rulecata",
     ],
 )

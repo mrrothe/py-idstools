@@ -53,7 +53,7 @@ def decode_inet_addr(addr):
 
 def mktempdir(delete_on_exit=True):
     """ Create a temporary directory that is removed on exit. """
-    tmpdir = tempfile.mkdtemp("idstools")
+    tmpdir = tempfile.mkdtemp("rulecata")
     if delete_on_exit:
         atexit.register(shutil.rmtree, tmpdir, ignore_errors=True)
     return tmpdir

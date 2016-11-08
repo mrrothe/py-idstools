@@ -30,14 +30,14 @@ import unittest
 import io
 import tempfile
 
-import idstools.rule
+import rulecata.rule
 
 class RuleTestCase(unittest.TestCase):
 
     def test_parse1(self):
         # Some mods have been made to this rule (flowbits) for the
         # purpose of testing.
-        rule = idstools.rule.parse("""alert tcp $HOME_NET any -> $EXTERNAL_NET $HTTP_PORTS (msg:"ET CURRENT_EVENTS Request to .in FakeAV Campaign June 19 2012 exe or zip"; flow:established,to_server; content:"setup."; fast_pattern:only; http_uri; content:".in|0d 0a|"; flowbits:isset,somebit; flowbits:unset,otherbit; http_header; pcre:"/\/[a-f0-9]{16}\/([a-z0-9]{1,3}\/)?setup\.(exe|zip)$/U"; pcre:"/^Host\x3a\s.+\.in\r?$/Hmi"; metadata:stage,hostile_download; reference:url,isc.sans.edu/diary/+Vulnerabilityqueerprocessbrittleness/13501; classtype:trojan-activity; sid:2014929; rev:1;)""")
+        rule = rulecata.rule.parse("""alert tcp $HOME_NET any -> $EXTERNAL_NET $HTTP_PORTS (msg:"ET CURRENT_EVENTS Request to .in FakeAV Campaign June 19 2012 exe or zip"; flow:established,to_server; content:"setup."; fast_pattern:only; http_uri; content:".in|0d 0a|"; flowbits:isset,somebit; flowbits:unset,otherbit; http_header; pcre:"/\/[a-f0-9]{16}\/([a-z0-9]{1,3}\/)?setup\.(exe|zip)$/U"; pcre:"/^Host\x3a\s.+\.in\r?$/Hmi"; metadata:stage,hostile_download; reference:url,isc.sans.edu/diary/+Vulnerabilityqueerprocessbrittleness/13501; classtype:trojan-activity; sid:2014929; rev:1;)""")
         self.assertEqual(rule.enabled, True)
         self.assertEqual(rule.action, "alert")
         self.assertEqual(rule.direction, "->")
@@ -54,14 +54,14 @@ class RuleTestCase(unittest.TestCase):
 
     def test_disable_rule(self):
         rule_buf = """# alert tcp $HOME_NET any -> $EXTERNAL_NET any (msg:"some message";)"""
-        rule = idstools.rule.parse(rule_buf)
+        rule = rulecata.rule.parse(rule_buf)
         self.assertFalse(rule.enabled)
         self.assertEquals(rule.raw, """alert tcp $HOME_NET any -> $EXTERNAL_NET any (msg:"some message";)""")
         self.assertEquals(str(rule), rule_buf)
 
     def test_toggle_rule(self):
         rule_buf = """# alert tcp $HOME_NET any -> $EXTERNAL_NET any (msg:"some message";)"""
-        rule = idstools.rule.parse(rule_buf)
+        rule = rulecata.rule.parse(rule_buf)
         self.assertFalse(rule.enabled)
         rule.enabled = True
         self.assertEquals(str(rule), """alert tcp $HOME_NET any -> $EXTERNAL_NET any (msg:"some message";)""")
@@ -73,7 +73,7 @@ class RuleTestCase(unittest.TestCase):
         for i in range(2):
             fileobj.write(u"%s\n" % rule_buf)
         fileobj.seek(0)
-        rules = idstools.rule.parse_fileobj(fileobj)
+        rules = rulecata.rule.parse_fileobj(fileobj)
         self.assertEquals(2, len(rules))
 
     def test_parse_file(self):
@@ -83,12 +83,12 @@ class RuleTestCase(unittest.TestCase):
         for i in range(2):
             tmp.write(("%s\n" % rule_buf).encode())
         tmp.flush()
-        rules = idstools.rule.parse_file(tmp.name)
+        rules = rulecata.rule.parse_file(tmp.name)
         self.assertEquals(2, len(rules))
 
     def test_parse_decoder_rule(self):
         rule_string = """alert ( msg:"DECODE_NOT_IPV4_DGRAM"; sid:1; gid:116; rev:1; metadata:rule-type decode; classtype:protocol-command-decode;)"""
-        rule = idstools.rule.parse(rule_string)
+        rule = rulecata.rule.parse(rule_string)
         self.assertEquals(rule["direction"], None)
 
     def test_multiline_rule(self):
@@ -96,10 +96,10 @@ class RuleTestCase(unittest.TestCase):
 alert dnp3 any any -> any any (msg:"SURICATA DNP3 Request flood detected"; \
       app-layer-event:dnp3.flooded; sid:2200104; rev:1;)
 """
-        rules = idstools.rule.parse_fileobj(io.StringIO(rule_string))
+        rules = rulecata.rule.parse_fileobj(io.StringIO(rule_string))
         self.assertEquals(len(rules), 1)
 
     def test_parse_nomsg(self):
         rule_string = u"""alert ip any any -> any any (content:"uid=0|28|root|29|"; classtype:bad-unknown; sid:10000000; rev:1;)"""
-        rule = idstools.rule.parse(rule_string)
+        rule = rulecata.rule.parse(rule_string)
         self.assertEquals("", rule["msg"])
