@@ -131,10 +131,49 @@ SAMPLE_THRESHOLD_IN = """# threshold.in (rulecat)
 
 """
 
-logging.basicConfig(
-    level=logging.getLevelName(os.environ.get("RULECAT_LOG_LEVEL", "INFO")),
-    format="%(levelname)s: %(message)s")
+class LogHandler(logging.StreamHandler):
+    """A custom log handler that attempts to log messages using a similar
+    color and format to Suricata.
+
+    """
+
+    GREEN = "\x1b[32m"
+    BLUE = "\x1b[34m"
+    REDB = "\x1b[1;31m"
+    YELLOW = "\x1b[33m"
+    RED = "\x1b[31m"
+    YELLOWB = "\x1b[1;33m"
+    ORANGE = "\x1b[38;5;208m"
+    RESET = "\x1b[0m"
+
+    def formatTime(self, record):
+        lt = time.localtime(record.created)
+        t = time.strftime("%Y-%m-%d %H:%M:%S", lt)
+        return "%s,%03d" % (t, record.msecs)
+
+    def emit(self, record):
+
+        if record.levelname == "ERROR":
+            level_prefix = self.REDB
+            message_prefix = self.REDB
+        else:
+            level_prefix = self.YELLOW
+            message_prefix = ""
+
+        self.stream.write("%s%s%s <%s%s%s> -- %s%s%s\n" % (
+            self.GREEN,
+            self.formatTime(record),
+            self.RESET,
+            level_prefix,
+            record.levelname,
+            self.RESET,
+            message_prefix,
+            record.getMessage(),
+            self.RESET))
+
 logger = logging.getLogger()
+logger.setLevel(level=logging.INFO)
+logger.addHandler(LogHandler())
 
 ET_PRO_URL = "https://rules.emergingthreatspro.com/%(code)s/suricata%(version)s/etpro.rules.tar.gz"
 
@@ -628,20 +667,18 @@ class HashTracker:
                 return True
         return False
 
-def resolve_etpro_url(etpro, suricata_path):
+def resolve_etpro_url(etpro, suricata_version):
     mappings = {
         "code": etpro,
         "version": ""
     }
-    suricata_version = rulecata.suricata.get_version(suricata_path)
-    if suricata_version.short:
+    if suricata_version and suricata_version.short:
         mappings["version"] = "-" + suricata_version.short
     return ET_PRO_URL % mappings
 
-def resolve_etopen_url(suricata_path):
+def resolve_etopen_url(suricata_version):
     mappings = {"version": ""}
-    suricata_version = rulecata.suricata.get_version(suricata_path)
-    if suricata_version:
+    if suricata_version and suricata_version.short:
         mappings["version"] = "-" + suricata_version.short
     return ET_OPEN_URL % mappings
 
@@ -720,10 +757,26 @@ def main():
     if args.dump_sample_configs:
         return dump_sample_configs()
 
+    if (not args.output and not args.merged):
+        if os.path.exists("/etc/suricata/rules"):
+            args.output = "/etc/suricata/rules"
+            logger.info("No output directory specified, will use %s" % (
+                args.output))
+        else:
+            logger.error("No output specified.")
+            return 1
+
+    if args.suricata:
+        suricata_version = rulecata.suricata.get_version(args.suricata)
+        logger.info("Found Suricata version %s at %s." % (
+            str(suricata_version.full), args.suricata))
+    else:
+        suricata_version = None
+
     if args.etpro:
-        args.url.append(resolve_etpro_url(args.etpro, args.suricata))
+        args.url.append(resolve_etpro_url(args.etpro, suricata_version))
     if not args.url or args.etopen:
-        args.url.append(resolve_etopen_url(args.suricata))
+        args.url.append(resolve_etopen_url(suricata_version))
     args.url = set(args.url)
 
     hash_tracker = HashTracker()
