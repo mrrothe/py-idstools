@@ -55,7 +55,7 @@ if sys.argv[0] == __file__:
 
 import rulecata.rule
 import rulecata.suricata
-import rulecata.net
+import rulecata.http
 from rulecata.util import archive_to_dict
 
 CONF_SAMPLE = """# rulecat.conf
@@ -269,7 +269,7 @@ class Fetch(object):
             local_checksum = hashlib.md5(open(tmp_filename).read()).hexdigest()
             remote_checksum_buf = BytesIO()
             logger.info("Fetching %s." % (checksum_url))
-            remote_checksum = rulecata.net.get(
+            remote_checksum = rulecata.http.get(
                 checksum_url, remote_checksum_buf)
             logger.debug("Local checksum=|%s|; remote checksum=|%s|" % (
                 local_checksum.strip(), remote_checksum_buf.getvalue().strip()))
@@ -304,7 +304,7 @@ class Fetch(object):
                 return self.extract_files(tmp_filename)
         if not os.path.exists(self.args.temp_dir):
             os.makedirs(self.args.temp_dir)
-        rulecata.net.get(
+        rulecata.http.get(
             url, open(tmp_filename, "wb"), progress_hook=self.progress_hook)
         logger.info("Done.")
         return self.extract_files(tmp_filename)

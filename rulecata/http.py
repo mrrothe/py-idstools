@@ -23,7 +23,7 @@
 # IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-""" Module for network related operations. """
+""" Rulecat module for http. """
 
 try:
     # Python 3.3...
@@ -71,12 +71,3 @@ def get(url, fileobj, progress_hook=None):
     remote.close()
     fileobj.flush()
     return bytes_read, info
-
-if __name__ == "__main__":
-
-    import sys
-
-    try:
-        get(sys.argv[1], sys.stdout)
-    except Exception as err:
-        print("ERROR: %s" % (err))

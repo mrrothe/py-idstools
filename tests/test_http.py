@@ -29,11 +29,11 @@ import os
 import unittest
 import io
 
-from rulecata import net
+from rulecata import http
 
 class GetTestCase(unittest.TestCase):
 
     def test_get0(self):
         buf = io.BytesIO()
-        bytes_read, info = net.get("file:///%s/Makefile" % (os.getcwd()), buf)
+        bytes_read, info = http.get("file:///%s/Makefile" % (os.getcwd()), buf)
         self.assertTrue(b"clean" in buf.getvalue())
