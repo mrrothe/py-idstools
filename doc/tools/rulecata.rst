@@ -1,7 +1,7 @@
 rulecat
 =======
 
-.. automodule:: rulecata.scripts.rulecat
+.. automodule:: rulecata.main
 
 Synopsis
 --------
