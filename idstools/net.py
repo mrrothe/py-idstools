@@ -55,7 +55,7 @@ def get(url, fileobj, progress_hook=None):
     ctx.check_hostname = False # Disable checking SSL cert of server
     ctx.verify_mode = ssl.CERT_NONE
     
-    remote = urlopen(url)
+    remote = urlopen(url,context=ctx)
     info = remote.info()
     try:
         content_length = int(info["content-length"])
