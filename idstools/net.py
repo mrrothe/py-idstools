@@ -51,7 +51,10 @@ def get(url, fileobj, progress_hook=None):
     :raises: Exceptions from urllib2.urlopen() and writing to the
       provided fileobj may occur.
     """
-
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False # Disable checking SSL cert of server
+    ctx.verify_mode = ssl.CERT_NONE
+    
     remote = urlopen(url)
     info = remote.info()
     try:
