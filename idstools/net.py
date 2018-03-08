@@ -24,7 +24,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 """ Module for network related operations. """
-
+import ssl
 try:
     # Python 3.3...
     from urllib.request import urlopen
